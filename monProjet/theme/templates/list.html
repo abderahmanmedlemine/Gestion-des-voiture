@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Véhicules</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-10">
+
+    <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold text-gray-700">Liste des Véhicules</h1>
+            <button id="openModal" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                + Ajouter
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-300 rounded-lg text-center">
+                <thead class="bg-gray-200 text-gray-600">
+                    <tr>
+                        <th class="p-3 border">Matricule</th>
+                        <th class="p-3 border">Modèle</th>
+                        <th class="p-3 border">Dernier Vidange</th>
+                        <th class="p-3 border">Kilométrage</th>
+                        <th class="p-3 border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vehicule in data_vehi %}
+                    <tr class="bg-white hover:bg-gray-100">
+                        <td class="p-3 border">{{ vehicule.matricule }}</td>
+                        <td class="p-3 border">{{ vehicule.modele }}</td>
+                        <td class="p-3 border">{{ vehicule.dernier_vidange }}</td>
+                        <td class="p-3 border">{{ vehicule.killometrage }} km</td>
+                        <td class="p-3 border">
+                            <button onclick="openEditModal(
+                                '{{ vehicule.matricule }}', 
+                                '{{ vehicule.modele }}', 
+                                '{{ vehicule.dernier_vidange }}', 
+                                '{{ vehicule.killometrage }}'
+                            )" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                                Modifier
+                            </button>
+                            <a href="{% url 'delete' vehicule.matricule %}" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 ml-2">
+                                Supprimer
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- MODAL Ajouter -->
+    <div id="modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <h2 class="text-xl font-bold mb-4 text-gray-700">Ajouter un Véhicule</h2>
+            <form method="post" action="{% url 'add' %}">
+                {% csrf_token %} 
+                <label class="block text-gray-600">Matricule</label>
+                <input type="text" class="w-full p-2 border rounded mb-3" name="matricule" required>
+
+                <label class="block text-gray-600">Modèle</label>
+                <input type="text" class="w-full p-2 border rounded mb-3" name="modele" required>
+
+                <label class="block text-gray-600">Dernier Vidange</label>
+                <input type="date" class="w-full p-2 border rounded mb-3" name="dernier_vidange" required>
+
+                <label class="block text-gray-600">Kilométrage</label>
+                <input type="number" class="w-full p-2 border rounded mb-3" name="killometrage" required>
+                
+                <div class="flex justify-end mt-4">
+                    <button id="closeModal" type="button" class="bg-gray-400 text-white px-4 py-2 rounded mr-2">Annuler</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Ajouter</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL Modifier -->
+    <div id="modalModify" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/3">
+            <h2 class="text-xl font-bold mb-4 text-gray-700">Modifier un Véhicule</h2>
+            <form method="post" action="" id="editForm" >
+                {% csrf_token %}
+                <label class="block text-gray-600">Matricule</label>
+                <input type="text" id="editMatricule" class="w-full p-2 border rounded mb-3" name="matricule" readonly>
+                
+                <label class="block text-gray-600">Modèle</label>
+                <input type="text" id="editModele" class="w-full p-2 border rounded mb-3" name="modele" required>
+
+                <label class="block text-gray-600">Dernier Vidange</label>
+                <input type="date" id="editVidange" class="w-full p-2 border rounded mb-3" name="dernier_vidange" required>
+
+                <label class="block text-gray-600">Kilométrage</label>
+                <input type="number" id="editkillometrage" class="w-full p-2 border rounded mb-3" name="killometrage" required>
+
+                <div class="flex justify-end mt-4">
+                    <button type="button" id="closeModalModify" class="bg-gray-400 text-white px-4 py-2 rounded mr-2">
+                        Annuler
+                    </button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openEditModal(matricule, modele, dernier_vidange, killometrage) 
+        {
+            document.getElementById('editMatricule').value = matricule;
+            document.getElementById('editModele').value = modele;
+            let dateObj = new Date(dernier_vidange);
+            let formattedDate = dateObj.toISOString().split('T')[0]; 
+            document.getElementById('editVidange').value = formattedDate;
+            document.getElementById('editkillometrage').value = killometrage;
+            document.getElementById('modalModify').classList.remove('hidden');
+            // Mettre à jour l'action du formulaire
+            document.getElementById('editForm').action = `/update/${matricule}`;
+        }
+        document.getElementById("openModal").addEventListener("click", () => document.getElementById("modal").classList.remove("hidden"));
+        document.getElementById("closeModal").addEventListener("click", () => document.getElementById("modal").classList.add("hidden"));
+        document.getElementById("closeModalModify").addEventListener("click", () => document.getElementById("modalModify").classList.add("hidden"));
+    </script>
+
+</body>
+</html>
