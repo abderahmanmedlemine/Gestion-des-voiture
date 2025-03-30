@@ -1,0 +1,63 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+
+	<body class="bg-blue-900 h-screen w-full font-serif">
+         <div class="text-white py-3 ">
+            <header class="flex justify-around  items-center">
+                <span class="font-bold text-2xl">RESTA<span class="text-yellow-300">URAN</span></span>
+                <nav class="flex gap-6">
+                    <a href="http://" class="hover:text-yellow-300 ease-in duration-200">Home</a>
+                    <a href="http://" class="hover:text-yellow-300 ease-in duration-200">About Us</a>
+                    <a href="http://" class="hover:text-yellow-300 ease-in duration-200">Menu</a>
+                    <a href="http://" class="hover:text-yellow-300 ease-in duration-200">Review</a>
+                    <a href="http://" class="hover:text-yellow-300 ease-in duration-200">Contact</a>
+                    <span>icon</span>
+                </nav>
+            </header>
+         </div>
+         <main class="grid grid-cols-2 items-center h-4/5">
+            <div class="flex justify-around">
+                <img src="{% static 'images/proj.png'%}" alt="" srcset="" class="w-80">
+            
+            </div>
+            <section>
+                <div class="col-span-1 text-justify space-y-10 ">
+                    <h1 class="text-5xl text-white">happy tummy with our resto</h1>
+                    <hr class="border-yellow-400 w-52">
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id fuga ipsum ea quidem vero harum expedita corporis error nihil voluptatum, quasi quam repudiandae distinctio repellat, maiores saepe at aperiam magnam!
+                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id fuga ipsum ea quidem vero harum expedita corporis error nihil voluptatum, quasi quam repudiandae distinctio repellat, maiores saepe at aperiam magnam!
+
+                    </p>
+                    <div class="icons">
+                        <div class="icon1">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="icon2">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="icon3">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <button class="bg-yellow-400 text-black text-center p-2 rounded-md w-36">Learn More</button>
+                </div>
+             
+            </section>
+         </main>
+
+    </body>
+</html>
+

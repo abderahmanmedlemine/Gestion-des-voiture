@@ -1,0 +1,99 @@
+{% load static tailwind_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>Django Tailwind</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+	</head>
+
+	<body>
+		<div class="bg-slate-900 w-full h-full pl-5 pr-8 grid grid-cols-3 gap-3 pb-14">
+			<section>
+				<nav>
+					<h2 class="text-blue-700 font-bold text-2xl py-2">KORSAT <span class="text-blue-400">X</span> PARMAGA</h2>
+					<div class="flex flex-col gap-3  text-white text-right ">
+						<a href="http://" class="border-r-2 bg-slate-100 bg-opacity-10 h-12 py-2 pr-1">Home</a>
+						<a href="http://" class="hover:border-r-2  bg-slate-100 bg-opacity-10 h-12 py-2 pr-1">About</a>
+						<a href="http://" class="hover:border-r-2  bg-slate-100 bg-opacity-10 h-12 py-2 pr-1">Contact</a>
+					</div>
+				</nav>
+			</section>
+<main class="col-span-2">
+
+	<div>
+		<section>
+			<header class="flex justify-between items-start py-3">
+				<div class="">
+					<h1 class="text-gray-300 text-5xl">Games</h1>
+					<h4 class="text-green-500 font-bold">For Gamers</h4>	
+				</div>
+				<div class="flex justify-end gap-2 mr-5">
+					<a href="http://" class="border-red-500 border bg-transparent text-red-500 m-auto ">Log in</a>
+					<a href="http://" class="border-red-500 border bg-transparent text-red-500 m-auto ">Sign up</a>
+				</div>
+			</header>
+		</section>
+
+		<h2 class="text-yellow-400 py-3 text-xl">Latest Games</h2>
+		<hr class=" border-yellow-400 mb-3 ">
+		<main class="grid grid-cols-3 gap-3 py-4">
+			<section class="relative ">
+				<div class="">
+					<img src="{% static 'images/ass.png' %}" alt="ass" srcset="" class="w-full h-full object-cover" >
+					<div class="text-white absolute bottom-0">
+						<h4>Assassin's creed:</h4>
+						<h5>codename hexe</h5>
+					</div>
+				</div>
+				<div class="absolute top-0 text-yellow-500">
+					<span class="icon">**</span>
+					<span class="text">4.5/5</span>
+				</div>
+			</section>
+			<section class="relative ">
+				<div class="">
+					<img src="{% static 'images/ass.png' %}" alt="ass" srcset="" class="w-full h-full object-cover" >
+					<div class="text-white absolute bottom-0">
+						<h4>Assassin's creed:</h4>
+						<h5>codename hexe</h5>
+					</div>
+				</div>
+				<div class="absolute top-0 text-yellow-500">
+					<span class="icon">**</span>
+					<span class="text">4.5/5</span>
+				</div>
+			</section>
+			<section class="relative">
+				<div class="">
+					<img src="{% static 'images/ass.png' %}" alt="ass" srcset="" class="w-full h-full object-cover" >
+					<div class="text-white absolute bottom-0 bg-slate-200 bg-opacity-15 w-full">
+						<h4>Assassin's creed:</h4>
+						<h5>codename hexe</h5>
+					</div>
+				</div>
+				<div class="absolute top-0 text-yellow-500">
+					<span class="icon">**</span>
+					<span class="text">4.5/5</span>
+				</div>
+			</section>
+
+		</main>
+		<h2 class="text-yellow-400 py-4 text-xl">Most Populor</h2>
+		<hr class=" border-yellow-400 mb-4 ">
+
+	</div>
+	<button class="w-full h-10 bg-blue-500 mb-3 text-2xl text-white transition ease-out duration-200 hover:bg-red-500 hover:scale-110">
+		Load More
+	</button>
+
+</div>
+
+</main>
+
+	</body>
+
+</html>
